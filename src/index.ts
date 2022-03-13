@@ -1,20 +1,22 @@
-import Square from "./models/Square";
+import Hourglass from "./models/Hourglass";
 
-const ON_DATA = "data";
+const events = {
+  ON_DATA: "data",
+};
 
 class Main {
   constructor() {
-    process.stdout.write("Informe a dimensão do quadrado: ");
-    process.stdin.on(ON_DATA, this.onReceiveData);
+    process.stdout.write("Informe a ordem da matriz: ");
+    process.stdin.on(events.ON_DATA, this.onData);
   }
 
-  private onReceiveData(buffer: Buffer) {
+  private onData(buffer: Buffer) {
     const data = buffer.toString().replace(/[\r\n]/g, "");
 
     try {
-      const square = new Square().setSize(data).toModel().traceBorders();
+      const hourglass = new Hourglass();
 
-      square.print();
+      hourglass.setSize(data).toModel().drawLines().fillWithSand().print();
     } catch (err) {
       console.error(err);
     }
