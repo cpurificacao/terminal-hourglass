@@ -85,13 +85,13 @@ export default class Hourglass {
     );
   }
 
-  private iterateOverMatrix(callback: iterateOverMatrixCallback) {
+  private iterateOverMatrix(cb: iterateOverMatrixCallback) {
     for (const i in this.matrix) {
       const row = this.matrix[i];
       const rowIndex = parseInt(i);
       const columnIndex = rowIndex;
 
-      callback(row, rowIndex, columnIndex);
+      cb.call(this, row, rowIndex, columnIndex);
     }
   }
 }
